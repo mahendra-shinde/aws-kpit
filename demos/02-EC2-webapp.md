@@ -32,10 +32,39 @@
 1.  Verify the location of default `index.html` file in linux server.
 
     ```bash
-    cd /usr/share/nginx/html
+    cd /var/www/html
     cat index.html
     # If the file exists, its contents should be displayed
     ```
 
 1.  Try accessing this website from Browser `http://PUBLIC_IP_EC2`
 
+1.  Go back to SSH prompt and use following commands to EXIT from linux server.
+
+    ```pwsh
+    exit
+    # The prompt should be changed from Linux to Windows
+    ```
+
+1.  To copy files from Local (Windows) filesystem to linux filesystem we use following command:
+
+    ```bash
+    # SYNTAX
+    scp -i PEM_FILE  SOURCE_FILE_PATH   USER@PUBLIC_IP:LINUX_DESTINATION_PATH
+    ```
+
+    ```pwsh
+    scp -i key101.pem  D:\git\aws-kpit\demos\src\index.html  ubuntu@3.93.172.183:/home/ubuntu
+    scp -i key101.pem  D:\git\aws-kpit\demos\src\main.css  ubuntu@3.93.172.183:/home/ubuntu
+    ```
+
+1.  Login with SSH and Move the files to correct location.
+
+    ```pwsh
+    ssh -i key101.pem ubuntu@3.93.172.183 
+    ls 
+    sudo mv * /var/www/html/
+    exit
+    ```
+
+1.  Revisit the URL `http://PUBLIC_IP_EC2`
