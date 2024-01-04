@@ -28,5 +28,14 @@
     sudo apt update -y
     sudo apt install nginx -y
     ```
+ 
+1.  Verify the location of default `index.html` file in linux server.
 
-    
+    ```bash
+    cd /usr/share/nginx/html
+    cat index.html
+    # If the file exists, its contents should be displayed
+    ```
+
+1.  Try accessing this website from Browser `http://PUBLIC_IP_EC2`
+
