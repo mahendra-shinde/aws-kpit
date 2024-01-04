@@ -3,3 +3,9 @@ AWS Training at KPIT / Pune
 
 Kindly refer to the PDF in [TOC](./TOC/AWS%20Course%20Content.pdf) for the coverage.
 
+
+## Demos 
+
+Demo # | Details | Link
+-------|-----------|-------
+1 | EC2 and VPC Demo | [demo-1](./demos/01-VPC-EC2.md)
