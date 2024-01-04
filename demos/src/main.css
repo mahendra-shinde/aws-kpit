@@ -1,0 +1,19 @@
+body,h1,h3,p {
+    margin: 0px;
+    
+}
+h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;   
+    padding: 10px;
+}
+h1 {
+   font-family: Verdana, Geneva, Tahoma, sans-serif; 
+   background-color: beige;
+   border-bottom: 3px solid black;
+   padding: 10px;
+}
+p{
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: justify;
+}
