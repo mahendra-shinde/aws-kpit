@@ -9,3 +9,4 @@ Kindly refer to the PDF in [TOC](./TOC/AWS%20Course%20Content.pdf) for the cover
 Demo # | Details | Link
 -------|-----------|-------
 1 | EC2 and VPC Demo | [demo-1](./demos/01-VPC-EC2.md)
+2 | EC2 Package Installation and Remote SSH | [demo-2](./demos/02-EC2-webapp.md)
