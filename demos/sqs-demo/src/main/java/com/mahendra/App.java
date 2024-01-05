@@ -6,7 +6,7 @@ import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClient;
 import com.amazonaws.services.sqs.model.Message;
-import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
+import com.amazonaws.services.sqs.model.SendMessageRequest;
 
 public class App 
 {
@@ -18,16 +18,21 @@ public class App
 
        String queueUrl = "https://sqs.us-east-1.amazonaws.com/890756660068/orders";
 
+        SendMessageRequest req = new SendMessageRequest()
+                                    .withQueueUrl(queueUrl)
+                                    .withMessageBody("The quick brown fox jumps over the lazy dog");
+        sqs.sendMessage(req);
+
        // Get All the messages from the queue
        List<Message> messages = sqs.receiveMessage(queueUrl).getMessages();
        //messages.forEach(m -> System.out.println(m.getBody()));
        for(Message m : messages){
             System.out.println("Message: "+m.getBody());
             System.out.println("Attributes: "+m.getAttributes());
-            System.out.println("Delete from the queue: ");
-            String handle = m.getReceiptHandle();
-            sqs.deleteMessage(queueUrl, handle);
+           // System.out.println("Delete from the queue: ");
+           // String handle = m.getReceiptHandle();
+           // sqs.deleteMessage(queueUrl, handle);
        }
-
+       
     }
 }
