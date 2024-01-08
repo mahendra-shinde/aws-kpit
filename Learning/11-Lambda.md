@@ -49,7 +49,7 @@ AWS Lambda is commonly used in various scenarios, including building serverless 
     ![Lambda Event](../demos/steps-screenshots/lambda-2-1.png)
     ![Lambda Event](../demos/steps-screenshots/lambda-2-2.png)
 
-1. Click on `Configuration` tab and goto permissions, to allow lambda function to `sendMessage` on SQS Queue `queue1`
+1. Click on `Configuration` tab and go to permissions, to allow lambda function to `sendMessage` on SQS Queue `queue1`
     You need to click on `Custom role name` which should take you to new browser tab (IAM Console)
 
     ![Lambda Event](../demos/steps-screenshots/lambda-3.png)

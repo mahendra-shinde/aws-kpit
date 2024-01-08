@@ -42,7 +42,7 @@ Amazon RDS is a popular choice for organizations looking to offload the manageme
 1. Click on the "Create database" button.
 1. Choose the "Standard create" option.
 1. Select the "Engine options" as "MySQL."
-1. Choose the appropriate version of MySQL for your application (I Preffer latest version).
+1. Choose the appropriate version of MySQL for your application (I Prefer latest version).
 1. In the "Templates" section, you can choose a predefined template or create a custom one.
 1. In the "Settings" section:
    - Set a DB instance identifier (a name for your RDS instance).
