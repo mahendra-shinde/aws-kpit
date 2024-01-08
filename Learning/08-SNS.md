@@ -8,7 +8,7 @@ Here are key features and concepts associated with Amazon SNS:
 
 1. **Topic:** A topic is a logical channel or feed to which messages can be sent by publishers and from which subscribers can receive messages. Publishers do not need to know who the subscribers are, and subscribers do not need to know who the publishers are. This abstraction allows for easy expansion and modification of the system.
 
-1. **Subscriber:** A subscriber is an endpoint or application that expresses interest in receiving messages from a particular topic. Subscribers can include AWS Lambda functions, Amazon Simple Queue Service (SQS) queues, Amazon Simple Storage Service (S3) buckets, HTTP endpoints, email/SMS endpoints, and more.
+1. **Subscriber:** A subscriber is an endpoint or application that expresses interest in receiving messages from a particular topic. Subscribers can include AWS Lambda functions, Amazon Simple Queue Service (SQS) queues, Amazon Simple Storage Service (S3) buckets, HTTP endpoints, email/SMS endpoints, and more. AWS SNS has not limit on number of subscribers. 
 
 1. **Protocol Support:** Amazon SNS supports multiple protocols for message delivery, including HTTP/HTTPS, Amazon Simple Queue Service (SQS), AWS Lambda, email/SMTP, Short Message Service (SMS), and application endpoints for mobile devices.
 

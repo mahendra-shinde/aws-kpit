@@ -8,9 +8,9 @@ Here are some key features and concepts related to Amazon RDS:
 
 1. **Database Engines:** RDS supports multiple database engines, allowing users to choose the engine that best fits their application's requirements. Commonly supported engines include MySQL, PostgreSQL, Oracle, Microsoft SQL Server, and Amazon Aurora.
 
-1. **Automated Backups:** RDS automatically performs regular backups of your database, allowing you to restore to any point in time within the retention period. You can also manually initiate backups.
+1. **Automated Backups:** RDS automatically performs regular backups of your database, allowing you to restore to any point in time within the retention period (Default retention for Automated daily backups is 7 days). You can also manually initiate backups.
 
-1. **High Availability:** Amazon RDS provides options for high availability through features like Multi-AZ (Availability Zone) deployments. In a Multi-AZ setup, a standby replica of the database is maintained in a different Availability Zone to provide fault tolerance.
+1. **High Availability:** Amazon RDS provides options for high availability through features like Multi-AZ (Availability Zone) deployments. In a Multi-AZ setup, a standby replica of the database is maintained in a different Availability Zone to provide fault tolerance. Amazon RDS also supports Read Replicas, a feature which offloads read traffic from the primary database for scalability.
 
 1. **Scalability:** You can easily scale your database instance vertically (by increasing or decreasing the instance size) or horizontally (by adding read replicas). This helps accommodate changing workloads and performance requirements.
 
