@@ -278,12 +278,7 @@ Replace placeholders (`your-rds-endpoint`, `your-username`, `your-password`, `yo
 
 ### Step 5: Run the Java Application
 
-Run your Java application using Maven:
-
-```bash
-mvn clean install
-mvn exec:java -Dexec.mainClass="com.example.DatabaseApp"
-```
+Run your Java application from VSCode
 
 Ensure that your Java environment has internet access to reach the AWS RDS endpoint.
 
