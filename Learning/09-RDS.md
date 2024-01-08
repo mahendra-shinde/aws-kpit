@@ -85,6 +85,29 @@ The RDS instance creation may take some time. You can monitor the progress on th
 
 Once connected, you can manage your MySQL database as you would with any other MySQL instance. Create databases, tables, and users, and execute queries based on your application requirements.
 
+> Database creation (Schema)
+
+```sql
+create schema sampledb;
+```
+
+> Sample Table creation
+
+```sql
+use sampledb;
+
+CREATE TABLE employees
+( empid int primary key auto_increment,
+firstname nvarchar(20),
+lastname nvarchar(30));
+
+INSERT into employees (firstname, lastname)
+VALUES ('Donald','Duck');
+
+INSERT into employees (firstname, lastname)
+VALUES ('Micky','Mouse');
+```
+
 ### Step 7: Monitor and Manage Through AWS Console
 
 Utilize the AWS Management Console to monitor the performance, configure backups, and make adjustments to your RDS instance as needed.
