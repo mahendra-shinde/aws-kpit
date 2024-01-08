@@ -31,42 +31,105 @@ AWS Lambda is commonly used in various scenarios, including building serverless 
 
 ## [DEMO] AWS Lambda function that uses `S3 Event` as trigger and then send a message in Queue as a response.
 
+## Prerequisites
 
-```python
-import json
-import boto3
+1. Create a new S3 bucket, lets assume 'buck0887' 
+1. Create a new SQS Queue, lets assume 'queue1', you need to note its URL and ARN for later use.
 
-def lambda_handler(event, context):
-    # Extract S3 event details
-    s3_event = event['Records'][0]['s3']
-    bucket_name = s3_event['bucket']['name']
-    object_key = s3_event['object']['key']
+    ![SQL QUEUE](../demos/steps-screenshots/lambda-1.png)
 
-    # Create SQS client
-    sqs = boto3.client('sqs')
+1. Create a new Lambda function with Language python 3.12 (From Scratch)
 
-    # URL of your SQS queue
-    queue_url = 'YOUR_SQS_QUEUE_URL'
+1. Add Trigger for function
+	Resource : S3
+	Name: S3 bucket from step#1
+	Event Type: All creation events
 
-    # Create a message for SQS
-    message = {
-        'bucket': bucket_name,
-        'object_key': object_key
-    }
+    ![Lambda Event](../demos/steps-screenshots/lambda-2.png)
+    ![Lambda Event](../demos/steps-screenshots/lambda-2-1.png)
+    ![Lambda Event](../demos/steps-screenshots/lambda-2-2.png)
 
-    # Send message to SQS
-    response = sqs.send_message(
-        QueueUrl=queue_url,
-        MessageBody=json.dumps(message)
-    )
+1. Click on `Configuration` tab and goto permissions, to allow lambda function to `sendMessage` on SQS Queue `queue1`
+    You need to click on `Custom role name` which should take you to new browser tab (IAM Console)
 
-    print(f"Message sent to SQS. Response: {response}")
+    ![Lambda Event](../demos/steps-screenshots/lambda-3.png)
+    
+1.  There should be a new Policy created, click on policy name.
 
-    return {
-        'statusCode': 200,
-        'body': json.dumps('Message sent to SQS successfully!')
-    }
-```
+    ![Lambda Event](../demos/steps-screenshots/lambda-4.png)
+
+1.  There is only ONE permission, for writing logs, Now click `Edit` button to add one more permission.
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-5.png)
+
+
+1.  Using Search panel on right, search for SQS and then select `SQS`
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-6.png)
+
+1.  Search for Operation "sendMessage" use checkbox to enable/select sendMessage event
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-7.png)
+
+1.  Click `Add` button to add the Queue ARN
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-8.png)
+
+1.  Select service `SQS` and resource type `Queue` then enter the ARN of queue1
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-9.png)
+
+1.  Click `Next` button
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-10.png)
+
+1.  Save changes made to IAM Role.
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-11.png)
+
+1.  Go back to previous window/tab where Lambda function is still open, click on `Code` tab. then copy the following code (Modify the code first, you need to update `queue_url` variable)
+
+    ![Lambda Event](../demos/steps-screenshots/lambda-12.png)
+
+    Save the changes using `File > Save` and then click `Deploy` button to upload modified lambda function.
+
+    ```python
+    import json
+    import boto3
+
+    def lambda_handler(event, context):
+        # Extract S3 event details
+        s3_event = event['Records'][0]['s3']
+        bucket_name = s3_event['bucket']['name']
+        object_key = s3_event['object']['key']
+
+        # Create SQS client
+        sqs = boto3.client('sqs')
+
+        # URL of your SQS queue
+        queue_url = 'https://sqs.us-east-1.amazonaws.com/890756660068/queue1'
+
+        # Create a message for SQS
+        message = {
+            'bucket': bucket_name,
+            'object_key': object_key
+        }
+
+        # Send message to SQS
+        response = sqs.send_message(
+            QueueUrl=queue_url,
+            MessageBody=json.dumps(message)
+        )
+
+        print(f"Message sent to SQS. Response: {response}")
+
+        return {
+            'statusCode': 200,
+            'body': json.dumps('Message sent to SQS successfully!')
+        }
+    ```
+
+1.  To test, open the S3 bucket and try uploading any file.
 
 Here's a breakdown of the code:
 
@@ -78,7 +141,6 @@ Here's a breakdown of the code:
 
 Make sure to replace `'YOUR_SQS_QUEUE_URL'` with the actual URL of your SQS queue. Additionally, you need to configure the S3 bucket to trigger the Lambda function on object creation events.
 
-Remember that the Lambda function's execution role should have the necessary permissions to read S3 events and send messages to SQS. Adjust the IAM role accordingly.
 
 ## [Java Demo] AWS Lambda function that uses `S3 Event` as trigger and then send a message in Queue as a response.
 
