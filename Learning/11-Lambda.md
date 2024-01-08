@@ -45,7 +45,7 @@ AWS Lambda is commonly used in various scenarios, including building serverless 
 	Name: S3 bucket from step#1
 	Event Type: All creation events
 
-    ![Lambda Event](../demos/steps-screenshots/lambda-2.png)
+    ![Lambda Event](../demos/steps-screenshots/lambda-2a.png)
     ![Lambda Event](../demos/steps-screenshots/lambda-2-1.png)
     ![Lambda Event](../demos/steps-screenshots/lambda-2-2.png)
 
