@@ -98,8 +98,8 @@ use sampledb;
 
 CREATE TABLE employees
 ( empid int primary key auto_increment,
-firstname nvarchar(20),
-lastname nvarchar(30));
+firstname varchar(20),
+lastname varchar(30) );
 
 INSERT into employees (firstname, lastname)
 VALUES ('Donald','Duck');
