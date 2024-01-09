@@ -7,14 +7,6 @@
     cd flask-app
     ```
 
-1.  Setup VirtualEnv (Setup Environment for Application)
-
-    ```cmd
-    virtualenv virt
-    pip install flask==3.0.0
-    echo "flask==3.0.0" > requirments.txt
-    ```
-
 1.  Inside 'flask-app' folder create a new file `app.py`
 
     ```python
@@ -25,9 +17,6 @@
     @app.route("/")
     def hello():
         return render_template('index.html')
-
-    if __name__ == "__main__":
-        app.run(host="0.0.0.0", port=5000)
     ```
 
 1.  Create HTML Template `index.html` inside folder 'templates' 
@@ -75,13 +64,9 @@
     }
     ```
 
-1.  Test the application locally
+1.  Convert entire folder `flask-app` to a ZIP file, make sure ZIP file contains all the files.
 
-    ```cmd
-    c:\python312\python.exe app.py
-    CTRL+C
-    ```
+    ![Flask-APP-Zip folder structure](../steps-screenshots/flask-app-zip.png)
 
-1.  Convert entire folder `flask-app` to a ZIP file
+1.  Create a new BeanStalk with Python 3.11 environment
 
-1.  Create a new BeanStalk with Python 3.11 environment, and upload flask-app.zip
