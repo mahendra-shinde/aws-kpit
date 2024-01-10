@@ -151,75 +151,53 @@ Remember to replace placeholders like `YourTableName`, `AttributeName`, and `Val
 
 ## Connect and Use DynamoDB from Java Application
 
-To create DynamoDB tables using the AWS SDK for Java 1.x, you can use the `AmazonDynamoDB` client and the `CreateTableRequest` class. Below is an example Java code snippet that demonstrates how to create a simple DynamoDB table using the SDK.
-
 Make sure you have the AWS SDK for Java added to your project. If you're using Maven, you can include the following dependency in your `pom.xml`:
 
 ```xml
 <dependencies>
-    <dependency>
-      <groupId>software.amazon.awssdk</groupId>
-      <artifactId>dynamodb</artifactId>
-    </dependency>
+   <dependency>
+      <groupId>com.amazonaws</groupId>
+      <artifactId>aws-java-sdk-dynamodb</artifactId>
+      <version>1.12.633</version>
+   </dependency>
 </dependencies>
 ```
 
 Now, you can use the following Java code:
 
 ```java
-import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
-import software.amazon.awssdk.regions.Region;
-import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
-import software.amazon.awssdk.services.dynamodb.model.*;
 
+import java.util.List;
+import java.util.Map;
+
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
+import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClient;
+import com.amazonaws.services.dynamodbv2.model.AttributeValue;
+import com.amazonaws.services.dynamodbv2.model.ListTablesResult;
+import com.amazonaws.services.dynamodbv2.model.ScanRequest;
+import com.amazonaws.services.dynamodbv2.model.ScanResult;
 public class DynamoDBTableCreation {
 
     public static void main(String[] args) {
         // Set up the DynamoDB client
-        DynamoDbClient dynamoDbClient = DynamoDbClient.builder()
-                .region(Region.US_EAST_1) // Replace with your desired region
-                .credentialsProvider(DefaultCredentialsProvider.create())
-                .build();
+         AmazonDynamoDB client = AmazonDynamoDBClient.builder().withRegion("us-east-1").build();
+         ListTablesResult result = client.listTables();
+         System.out.println("Number of tables in dynamodb: "+result.getTableNames().size());
 
-        // Define the table name and its attributes
-        String tableName = "YourTableName";
-        String attributeName = "AttributeName";
+         for(String table : result.getTableNames()){
+            System.out.println("Table found: "+table);
 
-        // Create a CreateTableRequest specifying the table name, primary key schema, and provisioned throughput
-        CreateTableRequest createTableRequest = CreateTableRequest.builder()
-                .tableName(tableName)
-                .keySchema(KeySchemaElement.builder()
-                        .attributeName(attributeName)
-                        .keyType(KeyType.HASH) // HASH for the partition key
-                        .build())
-                .attributeDefinitions(AttributeDefinition.builder()
-                        .attributeName(attributeName)
-                        .attributeType(ScalarAttributeType.S) // S for String type
-                        .build())
-                .provisionedThroughput(ProvisionedThroughput.builder()
-                        .readCapacityUnits(5L) // Adjust based on your requirements
-                        .writeCapacityUnits(5L) // Adjust based on your requirements
-                        .build())
-                .build();
+            ScanResult scanResult = client.scan(new ScanRequest(table));
+            for(Map<String, AttributeValue> item :  scanResult.getItems() ){
+               for(String key : item.keySet()){
+                System.out.println(key +" = "+ item.get(key) );
+               }
+            }
+        }
 
-        // Create the table
-        dynamoDbClient.createTable(createTableRequest);
-
-        // Close the DynamoDB client
-        dynamoDbClient.close();
-
-        System.out.println("Table creation initiated. Please check AWS DynamoDB Console for the status.");
     }
 }
 ```
-
-In this example:
-
-- Replace `YourTableName` with the desired table name.
-- Replace `AttributeName` with the desired attribute name for the primary key.
-- Adjust the region and provisioned throughput values according to your requirements.
-
-Note: Make sure that the AWS credentials used by the `DefaultCredentialsProvider` have the necessary permissions to create DynamoDB tables. Also, be aware of eventual consistency in DynamoDB, where it might take some time for the table to be fully created and accessible after the `createTable` operation.
 
 ## Connect DynamoDB using Python boto3
 
