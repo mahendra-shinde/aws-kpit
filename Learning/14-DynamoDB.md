@@ -131,6 +131,11 @@ aws dynamodb get-item --table-name YourTableName --key '{"AttributeName1": {"S":
 ```bash
 aws dynamodb get-item   --table-name="contacts" --key='{ "contactid": { "N": "101" }, "lastname":{"S":"Shinde"}}'
 ```
+#### Get All items
+
+```bash
+aws dynamodb scan --table-name contacts --output yaml
+```
 
 #### Query:
 
