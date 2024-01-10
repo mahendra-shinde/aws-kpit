@@ -16,7 +16,9 @@ Here are some key features and concepts related to Amazon SQS:
 
 1. **Dead Letter Queues:** SQS provides Dead Letter Queues (DLQs) as a mechanism to capture and store messages that cannot be processed successfully after a certain number of attempts. This helps in identifying and handling problematic messages.
 
-1. **Message Retention:** SQS allows you to set a retention period for messages in the queue. Messages that exceed this retention period are automatically deleted from the queue.
+1. **Message Retention:** SQS allows you to set a retention period for messages in the queue. Messages that exceed this retention period are automatically deleted from the queue. 
+    
+    > The maximum retention period for messages is 14 Days.
 
 1. **Security and Access Control:** SQS integrates with AWS Identity and Access Management (IAM), allowing you to control access to your queues and messages. You can define IAM policies to manage who can send or receive messages from a queue.
 
