@@ -48,3 +48,34 @@
 Hi,
 You bill for month <MONTH-FROM_DB> is due. Please pay Rs <AMT-FROM-DB> in 15 days.	
 ```
+
+## Assignment 3 : 
+
+MacroLight Ltd is building an application for their e-commerce platform `macrobuy.com`. They need to store all the product details in a database. Help them choose right database, making sure following requirements are met.
+
+-	Database must be highly scalable
+-   Database schema must be flexible enough, to add new attributes to records.
+-	Handling Data inside database should be easy with API, no need for SQL like queries
+
+Once you choose the database, create the table with following records:
+
+	productId: P10102
+	category:  Storage Device
+	name:	   Ultra Store 32 GB
+	other_name: Pen Drive
+	weight:		8 Grams
+
+	ProductId: P37446
+	category:  Cloths
+	size:	   XL
+	colour:	   darkred
+	material:	satin
+
+
+	ProductId:	U3644748
+	category:   Food
+	expiry:     2 months from MFG
+	MFG-date:	10th Jan, 2024
+
+Write a code in java or python which should enable users to perform 'search' operation on above table. User should be able to search product using productId attribute.
+
