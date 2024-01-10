@@ -213,27 +213,19 @@ Here's an example Python script that demonstrates how to create a DynamoDB table
 import boto3
 
 # Replace these values with your own
-aws_access_key_id = 'YOUR_ACCESS_KEY'
-aws_secret_access_key = 'YOUR_SECRET_KEY'
-region_name = 'YOUR_REGION'
-table_name = 'YourTableName'
+table_name = 'students'
 
 # Initialize DynamoDB client
-dynamodb = boto3.client(
-    'dynamodb',
-    aws_access_key_id=aws_access_key_id,
-    aws_secret_access_key=aws_secret_access_key,
-    region_name=region_name
-)
+dynamodb = boto3.client('dynamodb')
 
 # Define the table schema
 table_schema = [
     {
-        'AttributeName': 'PrimaryKey',
+        'AttributeName': 'rollnum',
         'KeyType': 'HASH'  # Hash key
     },
     {
-        'AttributeName': 'SortKey',
+        'AttributeName': 'lastname',
         'KeyType': 'RANGE'  # Sort key
     }
 ]
@@ -248,8 +240,8 @@ provisioned_throughput = {
 dynamodb.create_table(
     TableName=table_name,
     AttributeDefinitions=[
-        {'AttributeName': 'PrimaryKey', 'AttributeType': 'S'},
-        {'AttributeName': 'SortKey', 'AttributeType': 'N'}
+        {'AttributeName': 'rollnum', 'AttributeType': 'N'},
+        {'AttributeName': 'lastname', 'AttributeType': 'S'}
     ],
     KeySchema=table_schema,
     ProvisionedThroughput=provisioned_throughput
@@ -264,8 +256,8 @@ dynamodb.get_waiter('table_exists').wait(
 
 # Put some sample records into the table
 items_to_put = [
-    {'PrimaryKey': {'S': 'item1'}, 'SortKey': {'N': '123'}, 'Attribute1': {'S': 'Value1'}},
-    {'PrimaryKey': {'S': 'item2'}, 'SortKey': {'N': '456'}, 'Attribute1': {'S': 'Value2'}},
+    {'rollnum': {'N': '1'}, 'lastname': {'S': 'Kale'}, 'firstname': {'S': 'Asha'}},
+    {'rollnum': {'N': '2'}, 'lastname': {'S': 'Bhosale'}, 'firstname': {'S': 'Asha'}},
     # Add more items as needed
 ]
 
@@ -277,7 +269,5 @@ for item in items_to_put:
 
 print('Records added to the table.')
 ```
-
-Remember to replace the placeholder values for `YOUR_ACCESS_KEY`, `YOUR_SECRET_KEY`, `YOUR_REGION`, and `'YourTableName'` with your own AWS credentials and desired table details.
 
 This script creates a DynamoDB table with a composite primary key (partition key and sort key) and provisions throughput for read and write capacity. It then waits for the table to become active before adding sample records to it. Adjust the schema, throughput, and items as needed for your specific use case.
