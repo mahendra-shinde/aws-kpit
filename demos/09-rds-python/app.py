@@ -2,10 +2,10 @@
 
 import mysql.connector
 
-host = "sampledb.cimr0kdyqj64.us-east-1.rds.amazonaws.com"
+host = "database-1.cimr0kdyqj64.us-east-1.rds.amazonaws.com"
 user = "admin"
-password = "Password!123"
-database = "sampledb"
+password = "Pass$123456"
+database = "sample"
 
 try:
     connection = mysql.connector.connect(
@@ -20,7 +20,7 @@ try:
         cursor = connection.cursor()
 
         # Execute SQL queries
-        cursor.execute("SELECT * FROM employees")
+        cursor.execute("SELECT * FROM country")
         rows = cursor.fetchall()
 
         # Process the result
